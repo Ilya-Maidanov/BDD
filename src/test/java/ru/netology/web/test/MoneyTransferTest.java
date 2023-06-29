@@ -55,6 +55,17 @@ public class MoneyTransferTest {
     assertEquals(initBalCardOne - amount, finBalCardOne);
     assertEquals(initBalCardTwo + amount, finBalCardTwo);
   }
+  @Test
+  void shouldTransferPennies() {
+    double amount = 750.5;
+    var firstCardInfo = DataHelper.getFirstCardInfo();
+    var topupPage = dashboardPage.transferPage1();
+    dashboardPage = topupPage.transfer(firstCardInfo.getCardNumber(), Double.toString(amount));
+    finBalCardOne = dashboardPage.getFirstCardBalance();
+    finBalCardTwo = dashboardPage.getSecondCardBalance();
+    assertEquals(initBalCardOne - amount, finBalCardOne);
+    assertEquals(initBalCardTwo + amount, finBalCardTwo);
+  }
 
 }
 
